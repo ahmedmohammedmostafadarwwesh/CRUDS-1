@@ -166,3 +166,6 @@ th,td{
     td:nth-child(10)::before { content: "Delete"; }
 }
 
+body {
+  padding-bottom: 0; /* ارتفاع الفوتر تقريبي */
+}
