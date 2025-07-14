@@ -213,3 +213,32 @@ function searchData(value) {
     document.getElementById("tbody").innerHTML = table;
   }
 }
+// commetnt
+function saveComment() {
+  const name = document.getElementById("userName").value.trim();
+  const comment = document.getElementById("userComment").value.trim();
+  if (!name || !comment) {
+    alert("يرجى كتابة اسمك والتعليق.");
+    return;
+  }
+  // تخزين التعليقات كمصفوفة
+  let comments = JSON.parse(localStorage.getItem("pageComments") || "[]");
+  comments.push({ name, comment });
+  localStorage.setItem("pageComments", JSON.stringify(comments));
+  document.getElementById("userName").value = "";
+  document.getElementById("userComment").value = "";
+  showComment();
+}
+
+function showComment() {
+  let comments = JSON.parse(localStorage.getItem("pageComments") || "[]");
+  let html = "<table style='width:90%;margin:auto;border-collapse:collapse;'><tr><th style='color:#fff;'>الاسم</th><th style='color:#fff;'>التعليق</th></tr>";
+  comments.forEach(c => {
+    html += `<tr><td style='color:#fff;border:1px solid #444;padding:6px;'>${c.name}</td><td style='color:#fff;border:1px solid #444;padding:6px;'>${c.comment}</td></tr>`;
+  });
+  html += "</table>";
+  document.getElementById("savedComment").innerHTML = comments.length ? html : "";
+}
+
+// عرض التعليقات عند تحميل الصفحة
+showComment();
